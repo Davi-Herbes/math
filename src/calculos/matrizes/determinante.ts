@@ -7,8 +7,8 @@ export class Determinante3Por3 {
 		],
 	) {
 		this.calcMatrizAumentada();
+		console.log(this.det());
 	}
-
 	private matrizAumentada: number[][] = [];
 
 	calcMatrizAumentada() {
@@ -27,9 +27,9 @@ export class Determinante3Por3 {
 
 		for (let i = 0; i < this.matriz.length; i++) {
 			let multiplicacao = 1;
-			multiplicacao *= this.matrizAumentada[i][i];
-			multiplicacao *= this.matrizAumentada[i + 1][i + 1];
-			multiplicacao *= this.matrizAumentada[i + 2][i + 2];
+			multiplicacao *= this.matrizAumentada[0][i];
+			multiplicacao *= this.matrizAumentada[1][i + 1];
+			multiplicacao *= this.matrizAumentada[2][i + 2];
 
 			somaDasDiagonais += multiplicacao;
 		}
@@ -42,13 +42,17 @@ export class Determinante3Por3 {
 
 		for (let i = 0; i < this.matriz.length; i++) {
 			let multiplicacao = 1;
-			multiplicacao *= this.matrizAumentada[i][i];
-			multiplicacao *= this.matrizAumentada[i + 1][i + 1];
-			multiplicacao *= this.matrizAumentada[i + 2][i + 2];
+			multiplicacao *= this.matrizAumentada[0][2 - i];
+			multiplicacao *= this.matrizAumentada[1][2 - i];
+			multiplicacao *= this.matrizAumentada[2][2 - i];
 
 			somaDasDiagonais += multiplicacao;
 		}
 
 		return somaDasDiagonais;
+	}
+
+	det(): number {
+		return this.diagonaisPrimarias() - this.diagonaisSecundarias();
 	}
 }
